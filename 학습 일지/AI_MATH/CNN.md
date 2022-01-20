@@ -104,13 +104,13 @@ convolution 연산의 차원은 확장 가능하다.
 
 역전파 방향을 살펴보자.
 
-<img src="https://user-images.githubusercontent.com/57162812/150378167-a47a491b-7143-497b-a5e6-ec6ffab7ceb3.png" width=300>
+<img src="https://user-images.githubusercontent.com/57162812/150378167-a47a491b-7143-497b-a5e6-ec6ffab7ceb3.png" width=400>
 
-<img src="https://user-images.githubusercontent.com/57162812/150378218-ca8eade1-dc16-4d0b-ba29-7c8ed752ca88.png" width=300>
+<img src="https://user-images.githubusercontent.com/57162812/150378218-ca8eade1-dc16-4d0b-ba29-7c8ed752ca88.png" width=400>
 
-<img src="https://user-images.githubusercontent.com/57162812/150378251-b369e4cf-514a-406b-8e08-f71d1eff98da.png" width=300>
+<img src="https://user-images.githubusercontent.com/57162812/150378251-b369e4cf-514a-406b-8e08-f71d1eff98da.png" width=400>
 
-<img src="https://user-images.githubusercontent.com/57162812/150378307-2afb4aa7-d6e4-4b9e-9f31-b18e4ff6cd83.png" width=300>
+<img src="https://user-images.githubusercontent.com/57162812/150378307-2afb4aa7-d6e4-4b9e-9f31-b18e4ff6cd83.png" width=400>
 
 역전파도 convolution 연산과 마찬가지로 각 커널에 들어오는 모든 그레디언트를 더해준다.
 
