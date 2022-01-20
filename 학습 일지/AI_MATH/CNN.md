@@ -94,23 +94,23 @@ convolution 연산의 차원은 확장 가능하다.
 
 - <img src="https://latex.codecogs.com/svg.image?o_1">으로 가는 입력값은 <img src="https://latex.codecogs.com/svg.image?x_1,x_2,x_3">가 있다.
 
-![image](https://user-images.githubusercontent.com/57162812/150377530-f2d5fbff-1484-4ece-b82d-6963b5c6f9fa.png)
+<img src="https://user-images.githubusercontent.com/57162812/150377530-f2d5fbff-1484-4ece-b82d-6963b5c6f9fa.png" width=300>
 
 전체적인 연산 방향을 보면 다음과 같다.
 
-![image](https://user-images.githubusercontent.com/57162812/150377798-cb52b0b5-ca3b-4d07-b98b-aaef41a828b1.png)
+<img src="https://user-images.githubusercontent.com/57162812/150377798-cb52b0b5-ca3b-4d07-b98b-aaef41a828b1.png" width=300>
 
 즉, <img src="https://latex.codecogs.com/svg.image?o_i=\sum_{j}w_jx_i+j-1">의 식을 도출해낼 수 있다.
 
 역전파 방향을 살펴보자.
 
-![image](https://user-images.githubusercontent.com/57162812/150378167-a47a491b-7143-497b-a5e6-ec6ffab7ceb3.png)
+<img src="https://user-images.githubusercontent.com/57162812/150378167-a47a491b-7143-497b-a5e6-ec6ffab7ceb3.png" width=300>
 
-![image](https://user-images.githubusercontent.com/57162812/150378218-ca8eade1-dc16-4d0b-ba29-7c8ed752ca88.png)
+<img src="https://user-images.githubusercontent.com/57162812/150378218-ca8eade1-dc16-4d0b-ba29-7c8ed752ca88.png" width=300>
 
-![image](https://user-images.githubusercontent.com/57162812/150378251-b369e4cf-514a-406b-8e08-f71d1eff98da.png)
+<img src="https://user-images.githubusercontent.com/57162812/150378251-b369e4cf-514a-406b-8e08-f71d1eff98da.png" width=300>
 
-![image](https://user-images.githubusercontent.com/57162812/150378307-2afb4aa7-d6e4-4b9e-9f31-b18e4ff6cd83.png)
+<img src="https://user-images.githubusercontent.com/57162812/150378307-2afb4aa7-d6e4-4b9e-9f31-b18e4ff6cd83.png" width=300>
 
 역전파도 convolution 연산과 마찬가지로 각 커널에 들어오는 모든 그레디언트를 더해준다.
 
