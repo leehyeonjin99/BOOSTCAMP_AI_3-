@@ -1,0 +1,6 @@
+# PyTorch Structure
+
+## Dataset&Dataloader
+
+### model에서의 data 전달 과정
+
