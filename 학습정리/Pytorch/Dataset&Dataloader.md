@@ -11,7 +11,7 @@
 ### Dataset Class
 - 데이터 입력의 형태 정의
 
-```
+```python
 import torch
 from torch.utils.data import Dataset
 
