@@ -16,5 +16,5 @@ boostcamp 3기 camper의 성장기
 |2022.01.26|PyTorch|[모델 불러오기]()/[Monitoring tools for Pytorch]()|
 |2022.01.27|PyTorch|[Multi-GPU](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/Calling_Model.md)/[Hyperparameter Tuning](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/Hyperparameter%20Tuning.md)|
 |2022.01.28|PyTorch|Pytorch Troubleshooting|
-|2022.02.03|Data Viz||[Introduction to Visualization]()/[기본적인 차트 사용]()|
+|2022.02.03|Data Viz|[Introduction to Visualization]()/[기본적인 차트 사용]()|
 
