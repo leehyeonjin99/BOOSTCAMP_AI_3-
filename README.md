@@ -11,5 +11,10 @@ boostcamp 3기 camper의 성장기
 |2022.01.18|AI MATH|[경사 하강법](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/%EA%B2%BD%EC%82%AC%20%ED%95%98%EA%B0%95%EB%B2%95.md)|
 |2022.01.19|AI MATH|[딥러닝 학습법 이해하기](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%ED%95%99%EC%8A%B5%EB%B2%95%20%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0.md) / [확률론](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/%ED%99%95%EB%A5%A0%EB%A1%A0.md)|
 |2022.01.20|AI MATH|[통계학](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/%ED%86%B5%EA%B3%84%ED%95%99.md)/[베이즈 통계학](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/%EB%B2%A0%EC%9D%B4%EC%A6%88%20%ED%86%B5%EA%B3%84%ED%95%99.md)/[CNN](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/CNN.md)/[RNN](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/AI_MATH/RNN.md)|
-|2022.01.24|PyTorch|[PyTorch_Basic]()|
-|2022.01.25|PyTorch|[QutoGrad&Optimizer]()/[Dataset&Dataloader]()|
+|2022.01.24|PyTorch|[PyTorch_Basic](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/Pytorch_Basic.ipynb)|
+|2022.01.25|PyTorch|[AutoGrad&Optimizer](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/AutoGrad%26Optimizer.md)/[Dataset&Dataloader](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/Dataset%26Dataloader.md)|
+|2022.01.26|PyTorch|[모델 불러오기]()/[Monitoring tools for Pytorch]()|
+|2022.01.27|PyTorch|[Multi-GPU](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/Calling_Model.md)/[Hyperparameter Tuning](https://github.com/leehyeonjin99/BOOSTCAMP_AI_Tech_Study_Diary/blob/main/%ED%95%99%EC%8A%B5%EC%A0%95%EB%A6%AC/Pytorch/Hyperparameter%20Tuning.md)|
+|2022.01.28|PyTorch|Pytorch Troubleshooting|
+|2022.02.03|Data Viz||[Introduction to Visualization]()/[기본적인 차트 사용]()|
+
