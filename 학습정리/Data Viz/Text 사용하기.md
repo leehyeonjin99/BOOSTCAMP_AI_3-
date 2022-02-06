@@ -158,4 +158,4 @@ ax.annotate(s=f'This is #{i} Studnet',
            )
 ```
 
-<p align='center'><https://user-images.githubusercontent.com/57162812/152690546-27958617-b1df-43f4-bc8c-6ded728a1bdf.png" width=200></p>
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152690546-27958617-b1df-43f4-bc8c-6ded728a1bdf.png" width=200></p>
