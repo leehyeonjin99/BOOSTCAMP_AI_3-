@@ -117,3 +117,54 @@ Conv layer parameter = Conv receptive field size - Number of channels
 - Gradient 계산은 GPU 전체에 걸쳐 동시에 진행  
   → 결과가 단일 GPU에서 train할 때와 정확히 일치
 - 4-GPU 시스템에서 단일 GPU 시스템보다 속도가 3.75배 향상
+
+## 4. Classification Experiments
+**Dataset**
+- 1000개의 class에 대한 이미지 포함
+- training set(1.3M) + validation set(50K) + testing set(1000K)
+- 평가 기준 : top-1 error, top5 error(모델이 예측한 최상위 5개 범주 안에 정답이 없는 경우)
+
+실험에서는 validation set을 test set으로 이용하였다.
+
+### 4-1. Single Scale Evaluation
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152683301-07ccff18-fa53-4a8f-af3c-2de6682ea1db.png" width=400></p>
+
+Q(test scale)를 고정시켰을 때의 모델 성능이다.
+- Layer가 깊어질수록 모델의 성능 향상
+- 같은 depth일지라도 1x1과 3x3 conv layer의 차이만 있었던 C와 D를 비교했을 때, D의 성능이 더 높다. C와 B를 비교해보았을 때, 1x1 conv layer를 사용함으로써 non-linearity를 추가한 것도 도움이 되지만, 1x1에 비해 3x3를 사용했을 때의 성능이 더 높았던 이유는 더 큰 spatial context를 고려할 수 있어야하는 것 역시 중요하다는 것을 알 수 있다.
+- 학습 시, single-scale보다 multi-scale을 사용하는 것이 모델 성능을 더 향상시켰다.
+
+### 4-2. Multi Scale Evalusation
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152683501-4f045d72-c677-4613-8dca-502d11dd76a3.png" width=400></p>
+
+- Train 뿐만 아니라 Test에도 Multi-Scale을 적용했을 때 더 높은 성능을 보여주었다. Test시에는 3개의 Q에 대해 모델 예측값을 추출한 다음, 평균을 내는 식으로 계산하였다.
+- 이 때, Train 데이터 분포와 Test 데이터 분포 사이에 너무 큰 차이가 발생하면 안되므로
+  - single-scale의 경우, test scale Q를 {S-32,S,S+32}로 설정하였다.
+  - multi-scale의 경우, test scale Q를 {S_min,0.5(S_min+S_max),S_max}로 설정하였다.
+
+### 4-3. Multi Crop Evaluation
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152683662-da66113d-ae25-40c7-abcf-488292193b3c.png" width=400></p>
+
+- 두 평가 기법(Multi-crop Evaluation, Dense Evaluation)의 soft-max output을 평균화해서 complementarity를 평가
+- Multi-crop Evalution이 미세하게 좋은 성능을 보이지만, Dense Evaluation보다 연산량이 많다.
+- 결과적으로, 두 평가기법의 조합이 각 평가기법의 성능 능가
+
+### 4-4. ConvNet Fusion
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152683752-3c5c532e-36ad-4d2c-96a1-ca889d78a6d0.png" width=400></p>
+
+- Soft-max class posterior을 평균화하여 output을 조합 → 모델의 보완성으로 성능 향상
+- ILSVRC 2014에서 7개의 모델을 앙상블하여 예측한 결과 7.3% test error를 제출하였고, 그 후 최적의 2개의 모델을 앙상블하여 에러를 6.8%까지 낮출 수 있었다고 한다.
+
+### 4-5. Comparision with SOTA
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152683819-72fbea73-6639-4f81-8125-2cffd54566a1.png" width=400></p>
+
+- 다른 기존의 모델 성능 크게 능가
+- Single Net 성능은 GoogleNet을 0.9%만큼 능가
+
+## Conclusion
+- 기존 ConvNet architecture보다 작은 3x3 receprive field 사용했다.
+- 최대 19 depth까지 weight alyer를 deep하게 설계하여 좋은 성능을 이끌어냈다.
