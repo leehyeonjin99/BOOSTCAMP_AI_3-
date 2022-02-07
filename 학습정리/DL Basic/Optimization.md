@@ -127,3 +127,78 @@
 - Momentum(이전 gradient의 경향 사용 알고리즘) + RMSprop(이전 learning rate의 경향 사용 알고리즘)
 
 <img src="https://user-images.githubusercontent.com/57162812/152773810-bb4e668b-8e36-448d-9c8b-a97853e62ed7.png" width=400>
+
+## Regularization
+### Early stopping
+
+- validation loss와 같은 일정 기준을 두고, 학습을 일정 기준에 따라 중단 시키는 것
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152774893-6882ee59-c6bb-4f03-ad0c-3797e928b1d4.png" width=400></p>
+
+### Parameter norm penalty(Weight Decay)
+
+- function space에 smoothness를 추가하자
+  - Neural Network의 parameter가 너무 커지지 않게 한다. : W의 2-norm의 제곱을 함께 줄이자
+  - '부드러운 함수일수록 Generalization Performance가 좋을 것이다.'라는 가정으로 시작된다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152775271-e2579abe-11c6-4f6d-803e-5f5f0600ae24.png" width=300></p>
+
+### Data Augmentation
+
+- Data는 많을수록 학습 능력이 좋다. 특히나 DL에서는 기하급수적으로 성능이 좋아진다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152775668-939ea29d-7a6b-453b-ac78-c41ac25a8703.png" width=400></p>
+
+- 주어진 training data에서 data augmentation을 하는 방법은?
+  - 기울기, 색 등을 바꾼다.
+  - label preserving augmentation : 변화를 했을 때도 label이 바뀌지 안흔ㄴ 내에서 변화를 시킨다.
+    - 6을 뒤집으면 label이 9로 바뀐다.
+    - 비행기, 자전거는 뒤집어도 label이 바뀌지 않는다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152776330-4b754961-a839-4657-b117-9f3b5abb8870.png" width=300></p>
+
+### Noise Robustness
+
+- 입력 데이터에 노이즈를 집어넣는다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152776452-a18d22ab-84f2-436c-8f54-52f39c8ab5b3.png" width=370></p>
+
+### Label Smoothing
+
+- 학습 데이터-레입르 쌍 2개를 smoothing 한다.
+  - decision bounding을 부드럽게 한다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152776619-acdfa918-4873-42a8-a79f-16c8f9850de2.png" width=350></p>
+
+- CutMix 입력 데이터 일부를 잘라서 둘을 이어붙인다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152776760-4acfe663-02b5-4679-8916-9ccfe9a97b76.png" width=350></p>
+
+### Dropout
+
+- 뉴런을 randomly하게 0으로 설정한다. : 일정 네트워크를 버리는 방법
+- 가장 일반적인 학습 개선 방법
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152776983-6216bf14-3d6a-4367-89cd-6340f9a7718e.png" width=350></p>
+
+### Batch Normalization
+
+-compute the empirical mean and variance independently for each dimention (layers) and normalize.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/152777101-12a60680-12f5-4df5-ac28-394baf611535.png" width=400></p>
+
+## Further Question
+1. 올바르게 cross-validation을 하기 위해서는 어떻 방법들이 존재할까요?
+
+[자료](https://towardsdatascience.com/understanding-8-types-of-cross-validation-80c935a4976d)
+
+2. Time series의 경우 일반적인 k-fold cv를 사용해도 될까요?
+- 결론 : 안된다.
+- 이유 : 시계열 데이터를 처리 할 때에는 두 가지 이유로 기존 교차 검증을 사용해서는 안된다.
+  - **시간의 종속성** : 시계열 데이터의 경우 데이터 손실을 방지하기 위해 데이터를 분할 할 때 특히 주의해야한다. 우리가 현재에 서서 미래를 예측하기 위해서는 시간순으로 발생하는 이벤트에 대한 모든 데이터를 보류해야한다. 따라서 k-fold 교차 검증을 사용하는 대신 시계열 데이터의 경우 데이터의 하위집합(일시적으로 분할)이 모델 성능 검증을 위해 사용된다.
+  - **테스트 세트의 arbitary 선택** : 만약 우리가 임의적으로 정한 test set에서 poor한 결과를 내었다면, 이는 전체적인 data에 대한 poor한결과가 아닌 그 특정한 독립적인 test set에의 poor한 결과이다
+- 따라서 우리는 **Nested Cross-Validation**을 사용한다. <p align='center'><img src="https://user-images.githubusercontent.com/57162812/152778003-92a06acc-e64d-484c-82f9-5d9b017cad43.png" width=400></p> 
+
+
+
+
