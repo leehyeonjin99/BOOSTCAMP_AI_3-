@@ -91,3 +91,18 @@ ResNet은 Layer를 쌓더라도 성능이 잘 나오게 하는 데에 집중하�
 - Transition Block : BatchNorm → 1x1 Conv → 2x2 AvgPooling 을 통해 channel dimension을 줄인다.
 
 <p align='center'><img src="https://user-images.githubusercontent.com/57162812/153035363-8ec8e50b-84a6-4902-9fd3-f1c465ebbc18.png" width=530></p>
+
+## Further Question
+
+1. 수업에서 다룬 modern CNN network의 일부는, Pytorch 라이브러리 내에서 pre-trained 모델로 지원합니다. pytorch를 통해 어떻게 불러올 수 있을까요?
+
+```python
+import torchvision.models as models
+
+resnet18=models.resnet18(pretrained=True)
+alexnet=models.alexnet(pretrained=True)
+squeezenet=models.squeezenet1_0(pretrained=True)
+vgg16=models.vgg16(pretrained=True)
+densenet=models.densenet161(pretrained=True)
+```
+
