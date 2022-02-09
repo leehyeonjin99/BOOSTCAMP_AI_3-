@@ -51,9 +51,9 @@
   - x_t와 h_(t-1)로 구성된 임시 cell state와 이전 cell state를 합쳐 x_t까지의 정보가 들어있는 cell state를 업데이트 한다.
 - Output Gate : 업데이트된 cell state를 사용하여 output을 만든다.
 
-<p align='center'><img src="https://user-images.githubusercontent.com/57162812/153170335-12e81fed-6521-46bd-a5da-715a00c815c4.png" width=400></p>
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/153170335-12e81fed-6521-46bd-a5da-715a00c815c4.png" width=500></p>
 
-<p align='center'><img src="https://user-images.githubusercontent.com/57162812/153170436-67379e1a-845e-4dd0-96cd-ad2e3f16c6cf.png" width=400></p>
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/153170436-67379e1a-845e-4dd0-96cd-ad2e3f16c6cf.png" width=500></p>
 
 ### Gated Recurrent Unit
 
