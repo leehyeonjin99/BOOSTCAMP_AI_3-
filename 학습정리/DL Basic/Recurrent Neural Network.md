@@ -62,5 +62,11 @@
 - **Reset gate**와 **update gate** 2개의 gate를 가진 architecture이다.
 - LSTM과 다르게 cell state 없이 hidden state로만 동작된다.
 
+## Further Question
+1. LSTM에서는 Modern CNN 내용에서 배웠던 중요한 개념이 적용되어 있습니다. 무엇일까요?
+  - Skip-Connection of ResNet
+  - Concatenation of DenseNet
+2. Pytorch LSTM 클래스에서 3dim 데이터(batch_size, sequence length, num feature), batch_first 관련 argument는 중요한 역할을 합니다. batch_first=True인 경우는 어떻게 작동이 하게되는걸까요?
+  - `batch_first=False`(default)인 경우 output 값의 사이즈는 (seq, batch, feature)로 나온다. 하지만, `batch_first=True`인 경우 output 값의 사이즈는 (batch, seq, feature)가 된다. 
 
 
