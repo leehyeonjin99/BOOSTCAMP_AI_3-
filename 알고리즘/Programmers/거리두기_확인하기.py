@@ -22,3 +22,4 @@ def dist_check(case):
                 elif i+1<5 and j-1>=0 and case[i+1][j-1]=='P' and (case[i+1][j]!='X' or case[i][j-1]!='X'):
                     return False
     return True
+
