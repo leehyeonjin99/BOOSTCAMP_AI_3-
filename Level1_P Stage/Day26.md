@@ -11,3 +11,5 @@
 
 ### 시도할 내용
 - Multi Classifier를 시도해봐야겠다.
+- Age > 60 에 대해서 augmentation을 사용해봐야겠다
+- 사람을 구분하여 train, valid를 나누면 새로운 사람을 Test 때 볼 수 있어 Evaluation 환경과 비슷해질 수 있고, random 하게 split하면 더 많은 사람을 확인할 수 있다. 과연 어떤 것이 더 좋을까?
