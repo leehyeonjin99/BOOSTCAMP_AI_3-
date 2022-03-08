@@ -100,7 +100,8 @@ feature extraction의 패러다임이 변화하였다. 사람이 feature를 직�
   - **Batch Normalization**이 대체
 - 11x11 convolution filter
   - receptive field의 문제
-  - 하나의 단계에서 보면 (P+K-1)x(P+k-1)
+  - KxK conv, stride 1, pooling layer of size PxP
+  - 하나의 단계에서 보면 (P+K-1)x(P+K-1)
 
 ## VGGNet
 
