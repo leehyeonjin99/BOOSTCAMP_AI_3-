@@ -178,5 +178,5 @@ self.up_conv = double_conv(1024, 512)
 
 - 각 channel별로 convolution하여 값을 뽑아 channel별 각각의 activation map에 대하여 1x1 convolution을 통해 하나의 값에 출력되도록 합쳐준다.
   - Convolution의 표현력은 유지되면서 계산량은 줄어들게 된다.
-
+- 계산량
 ![image](https://user-images.githubusercontent.com/57162812/157239856-bda8b284-e255-4c4e-9430-a05060e5178b.png)
