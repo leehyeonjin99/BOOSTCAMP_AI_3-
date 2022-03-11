@@ -59,6 +59,11 @@ Sementic segmentation vs. Instance Segmentation, Panoptic Segmentation
 4. 기존에 training 되어있던, fine-tuning이 된 CNN model에 넣어 CNN feature을 계산한다.
   > CNN은 미리 영상 인식에 학습된 network를 사용한 후, 뒤쪽에 fc layer에서 추출된 feature를 기반으로 SVM만을 학습시켜 사용
 5. Category 예측
+6. bounding box regression을 통해 더욱 정교한 위치를 교정해준다.
+  > 어떻게?
+  >
+  > bbox의 ground truth와 비슷해지도록 학습
+  > [갈아먹는 Object Detection [1] R-CNN](https://yeomko.tistory.com/13)
 
 **단점**
 
