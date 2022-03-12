@@ -78,10 +78,9 @@
   _ = model(img)
   ```
   
-  **Grammer : Visualizing Saliency**
-  
-  - ground_truth에 대한 gradient 구하기
-    ```python
+**Grammer : Visualizing Saliency**
+- ground_truth에 대한 gradient 구하기
+  ```python
     def compute_gradient_score(scores, image, class_idx):
       """
       Returns the gradient of s_y (the score at index class_idx) w.r.t the input image (data), ds_y / dI. 
@@ -113,7 +112,7 @@
     vis, _ = torch.max(vis, 0) # 각 channel별 가장 큰 값 및 위치 반환
     
     return vis # (224,224)
- ```
+  ```
  
 **Grammer : Visualizing Grad-CAM**
 
