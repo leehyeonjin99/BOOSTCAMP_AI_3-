@@ -1,0 +1,30 @@
+# Overview of multi-modal learning
+## Oerview of multi-modal learning
+- `uni=modal` : 하나의 type의 data에만 집중하는 것
+- `multi-modal learning` : 한 type의 data가 아닌 다른 type의 data들을 같이 활용하는 학습법 
+  - text data + sound data + image data
+
+#Mulri-modal task(1) - Visual data & Text
+## Text embedding
+## Joint embedding
+## Cross modal translation
+## Cross modal reasoning
+# Multi-modal tasks(2) - Visual data & Audio
+## Sound representation
+## Joint embedding
+## Cross modal translation
+## Cross modal reasoning
+# Conclusion. Beyond image, text and audio
+
+
+
+
+
+Further Question
+
+(1) Multi-modal learning에서 feature 사이의 semantic을 유지하기 위해 어떤 학습 방법을 사용했나요?
+
+(2) Captioning task를 풀 때, attention이 어떻게 사용될 수 있었나요?
+
+(3) Sound source localization task를 풀 때, audio 정보는 어떻게 활용되었나요?
+
