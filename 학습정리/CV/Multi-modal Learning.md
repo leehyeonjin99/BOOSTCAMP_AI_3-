@@ -245,7 +245,7 @@ caption 추론 과정은 다음 그림과 같다.
 
 **Application - Scene recognition by sound**
 -sound를 통해서 장면을 인식한다.
-![image](https://user-images.githubusercontent.com/57162812/158532383-24482ba1-f4a8-47a6-bfb4-01ad8f711450.png)
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158532383-24482ba1-f4a8-47a6-bfb4-01ad8f711450.png" width =60%></p>
 
 **SoundNet**
 
@@ -254,26 +254,85 @@ caption 추론 과정은 다음 그림과 같다.
   2. video의 frame들을 pre-trained visual recognition network에 넣어준다. + video의 auuio를 raw waveform 형태로 추출해 1D CNN 구조에 넣어준다. 
     > spectrum이 아닌 waveform을 사용한다.
   4. Image CNN을 통해 Object(물체) Distribution을 출력 + Places CNn을 통해 Scene(장면) Distribution 출력
-  5. 1D CNNㅢ 마지막에 2개의 head로 분리해준다. : Scene Distribution을 따라하는 head + Object Recognition을 따라하는 head
+  5. 1D CNN의 마지막에 2개의 head로 분리해준다. : Scene Distribution을 따라하는 head + Object Recognition을 따라하는 head
   6. KL divergence loss를 통해서 Sound branch 쪽만 학습된다.
   7. `Teacher-student manner`
 - visual knowledge를 sound에게 transfer했다. : `Transfer learning`
 
-![image](https://user-images.githubusercontent.com/57162812/158532465-6423c5a2-ab65-4e74-aa3a-0fc6e2361d8e.png)
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158532465-6423c5a2-ab65-4e74-aa3a-0fc6e2361d8e.png" width =60%></p>
 
 - 학습된 SoundNet Network를 pre-trained network로써 target task에 응용 가능하다.
-- pool5 layer를 추출하여 사용한다. : pool5s는 sound를 표현하는 representation이다.
-- pool5에 classifier를 추가해
+- pool5 layer를 추출하여 사용한다. : pool5의 output은 sound를 표현하는 representation이다.
+  - 1D CNN의 마지막 Conv8은 Object Distribution과 Scene Distribution을 따라하기 때문에 Pool5가 더 일반화된 semantic info를 가진다.
+- pool5에 classifier를 추가해 풀고 싶은 target task를 classifier만 학습해 사용하게 된다.
 
 ## Cross modal translation
+
+**Speech2Face**
+- 음성을 듣고 얼굴을 상상하는 모델이다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158559071-aed557ac-b9f4-4d63-af01-30324823b5a4.png" width =60%></p>
+
+**Speech2Face - Module network**
+
+- Module network 활용
+  > **Module network**  
+  > 각자 담당하고 있는 미리 학습된 network들을 조합하는것
+1. VGG-Face Model
+    - 얼굴 이미지가 들어오면 fixed dimensional vector로 표현
+2. Face Decoder
+    - face feature가 들어오면 무표정의 정면의 이미지를 instruction한다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158559916-0ac59355-9d32-4db6-94ad-3b6b59c4a858.png" width =60%></p>
+
+**Speech2Face - Training**
+
+- 인터뷰 비디오의 얼굴과 목소리를 이용한다.
+  - Face Image를 Face Regcognition에 넣어 Face Feature를 추출한다.
+  - Voice Data를 Speech2Face 모델을 통과시켜 Feature vector를 추출한다.
+- Face feature와 Voice feature이 호환 가능하도록 학습시킨다.
+  - Voice feature vector가 Face feature vector를 따라하도록 한다.
+
+**Application - Image-to-speech synthesis**
+- 이미지로부터 speech를 만든다.
+
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158560947-7056a679-e11a-4838-9c25-39006b39adb7.png" width =60%></p>
+
+
+**Image-to-speech synthesis - Module networks**
+
+1. Image가 들어오면 CNN을 통해 14x14 feature map을 만들어준다.
+2. Show, Attend, and Tell 구조를 활용해 word가 아닌 sub-word unit을 출력한다.
+3. unit으로부터 음성을 보관하는 Unit-to-Speech Model을 TTS를 이용해 학습시킨다.
+    > TTS는 text to speech로 Text(sub-word unit)에서 Speech로 변화시켜주는 network이다.
+
+![image](https://user-images.githubusercontent.com/57162812/158561131-eafde1d7-e061-4358-8510-8f6a82d7a744.png)
+
+
+
 ## Cross modal reasoning
-# Conclusion. Beyond image, text and audio
+
+**Application - Sound source localization**
+- 사람의 소리와 이미지를 주었을 때, 소리가 어디서 났는지 이미지에 localization한다.
+
+![image](https://user-images.githubusercontent.com/57162812/158562074-986ccd6d-9e7c-40fb-99b9-6e912ba363f9.png)
+
+**Sound source localization**
+
+![image](https://user-images.githubusercontent.com/57162812/158562425-52dadef3-ac72-45ee-a504-bf17c213a48e.png)
+
+- Visual net은 공간 feature를 유지하는 spatial feature를 제공한다.
+- localization score를 추출하기 위해서 두 feature vector를 내적한다.
+- **Fully supervised version**
+  - GT가 존재하여 loss를 사용하여 학습시킨다.
+- **Unsupervised version**
+  - image의 feature vector와 Localization score를 element-wise multiplication을 통한 평균으로 Attended visual feature를 출력한다.
+  - attended visual feature와 audio feature가 같은 비디오에서 나왔다면 비슷하게, 다른 비디오였다면 다르게 한다. `unsupervised metric learn.loss`
+- **Semi-supervised version**
+  - supervised loss와 unsupervised loss를 모두 사용한다.
 
 
-
-
-
-Further Question
+# Further Question
 
 (1) Multi-modal learning에서 feature 사이의 semantic을 유지하기 위해 어떤 학습 방법을 사용했나요?
 
