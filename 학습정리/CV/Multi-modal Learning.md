@@ -306,7 +306,7 @@ caption 추론 과정은 다음 그림과 같다.
 3. unit으로부터 음성을 보관하는 Unit-to-Speech Model을 TTS를 이용해 학습시킨다.
     > TTS는 text to speech로 Text(sub-word unit)에서 Speech로 변화시켜주는 network이다.
 
-![image](https://user-images.githubusercontent.com/57162812/158561131-eafde1d7-e061-4358-8510-8f6a82d7a744.png)
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158561131-eafde1d7-e061-4358-8510-8f6a82d7a744.png" width =60%></p>
 
 
 
@@ -315,12 +315,11 @@ caption 추론 과정은 다음 그림과 같다.
 **Application - Sound source localization**
 - 사람의 소리와 이미지를 주었을 때, 소리가 어디서 났는지 이미지에 localization한다.
 
-![image](https://user-images.githubusercontent.com/57162812/158562074-986ccd6d-9e7c-40fb-99b9-6e912ba363f9.png)
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158562074-986ccd6d-9e7c-40fb-99b9-6e912ba363f9.png" width =60%></p>
 
 **Sound source localization**
 
-![image](https://user-images.githubusercontent.com/57162812/158562425-52dadef3-ac72-45ee-a504-bf17c213a48e.png)
-
+<p align='center'><img src="https://user-images.githubusercontent.com/57162812/158566959-23307b78-9bd1-4370-b18a-46f87fb096bd.png" width =60%></p>
 - Visual net은 공간 feature를 유지하는 spatial feature를 제공한다.
 - localization score를 추출하기 위해서 두 feature vector를 내적한다.
 - **Fully supervised version**
