@@ -5,7 +5,7 @@
   - text data + sound data + image data
 <p align='center'><img src="https://user-images.githubusercontent.com/57162812/158508397-e5f35a94-1b98-4cfb-92dc-598d22cb451b.png" width =60%></p>
 
-#Mulri-modal task(1) - Visual data & Text
+# Multi-modal task(1) - Visual data & Text
 ## Text embedding
 ## Joint embedding
 ## Cross modal translation
