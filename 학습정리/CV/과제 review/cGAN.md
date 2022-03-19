@@ -46,6 +46,8 @@ class Generator(nn.Module):
 - label에 대한 정보, 즉 condition을 함께 입력해 image와 합친다.
 - `self.fc1_1`과 `self.fc2_1`의 output dimension은 input dimension보다 크다. input과 label을 합치기 전에 dimension을 맞춰주는 작업에 있어서 공간정보를 잃지 않기 위해서 이다.
 - activation function으로 `tanh()`를 사용하였다. `sigmoid()`는 중심이 0이 아니기 때문에 문제점이 발생할 수 있는 부분을 `tanh()`가 해결해준다. 이 실험에서는 noise를 많이 없애주는 것을 확인할 수 있다.
+![image](https://user-images.githubusercontent.com/57162812/159130157-132d22ec-efa7-410e-893c-fd64109d0596.png)
+
 
 ## Discriminator
 ```python
