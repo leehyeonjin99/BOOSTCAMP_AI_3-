@@ -112,4 +112,4 @@ def soft_nms(dets, box_scores, sigma = 0.5, thresh = 0.001, cuda = 0):
   return keep
 ```
 
-[oft-NMS, Improving Object Detection With One Line of Code](https://deep-learning-study.tistory.com/606)
+[Soft-NMS, Improving Object Detection With One Line of Code](https://deep-learning-study.tistory.com/606)
