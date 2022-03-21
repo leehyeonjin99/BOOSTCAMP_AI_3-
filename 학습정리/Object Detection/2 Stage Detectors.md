@@ -1,6 +1,6 @@
 # R-CNN
 ## Overview
-![image](https://user-images.githubusercontent.com/57162812/159202000-e3f978b2-9d99-4eae-a34e-e33ba7e4607c.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159202000-e3f978b2-9d99-4eae-a34e-e33ba7e4607c.png" width="60%"></p>
 
 - Sliding Window
   - scale과 ratio가 다른 sliding window를 통해 뽑힌 region을 통해 후보 영역을 사용한다.
@@ -8,10 +8,10 @@
 
 - Selective Search
   - 이미지의 색, 질감, shape의 특성을 통해 무수히 많은 작은 영역으로 나눠 영역을 점차 통합해 나간다.
-  ![image](https://user-images.githubusercontent.com/57162812/159202241-0030c042-2b0b-4530-b236-e7b3560e6130.png)
+  <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159202241-0030c042-2b0b-4530-b236-e7b3560e6130.png" width="40%"></p>
 
 ## Pipeline
-![image](https://user-images.githubusercontent.com/57162812/159202945-a9d32f0b-adaa-489f-8a53-a5c7b5e8c6cb.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159202945-a9d32f0b-adaa-489f-8a53-a5c7b5e8c6cb.png" width="60%"></p>
 
 1. 입력 이미지 받기
 2. Selective Search를 통해 약 2000개의 ROI를 추출
@@ -66,22 +66,22 @@
 - ROI마다 CNN 통과
   - 2000번 CNN 통과로 시간 오래 걸린다.
 
-![image](https://user-images.githubusercontent.com/57162812/159204480-8e599beb-640c-4b20-9b99-0f38b658fd2e.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159204480-8e599beb-640c-4b20-9b99-0f38b658fd2e.png" width="50%"></p>
 
 ## Spatial Pyramid Pooling
 
 **R-CNN vs. SPPNet**
 
-![image](https://user-images.githubusercontent.com/57162812/159204711-88681170-dd66-46b4-bc23-53786bbd7fba.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159204711-88681170-dd66-46b4-bc23-53786bbd7fba.png" width="80%"></p>
 
 - 2000 ROI → CNN vs. CNN → 2000 ROI 
 - warping vs. spatial pyramid pooling layer
 
 **Spatial Pyramid Pooling**
 
-![image](https://user-images.githubusercontent.com/57162812/159204947-bebb50cb-4d45-4f8d-8695-998fd298b6a6.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159204947-bebb50cb-4d45-4f8d-8695-998fd298b6a6.png" width="45%"></p>
 
-![image](https://user-images.githubusercontent.com/57162812/159204968-1fa7ed23-3305-4c3e-a04b-76f9f2720022.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159204968-1fa7ed23-3305-4c3e-a04b-76f9f2720022.png" width="60%"></p>
 
 image를 고정된 여러가지의 feature size에 맞게 binnig하여 pooling을 통해 feature vector를 추출해 concatenation한다.
 
@@ -94,16 +94,16 @@ image를 고정된 여러가지의 feature size에 맞게 binnig하여 pooling�
 # Fast R-CNN
 ## Pipeline
 
-![image](https://user-images.githubusercontent.com/57162812/159205163-18202cd6-5811-4df1-b99c-cd2ea7d1ede6.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159205163-18202cd6-5811-4df1-b99c-cd2ea7d1ede6.png" width="60%"></p>
 
 1. 이미지를 CNN에 넣어 feature 추출 
     - VGG16 사용
 2. RoI Projection을 통해 feature map 상에서 RoI를 계산
   - 원본 이미지에서 2000개의 Selective Search를 통해 RoI를 뽑아 feature map에 그대로 수용시킨다. 
-  ![image](https://user-images.githubusercontent.com/57162812/159205487-25b17330-3bc4-4e11-bbc1-f9d7d6696ed8.png)
+  <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159205487-25b17330-3bc4-4e11-bbc1-f9d7d6696ed8.png" width="60%"></p>
 3. RoI Pooling을 토앻 일정한 크기의 feature를 추출 ≓ spatial pyramid pooling
     - target grid size 7x7 하나만 사용
-    ![image](https://user-images.githubusercontent.com/57162812/159205698-ebb6dde4-b13c-416a-b722-b29bcdfb9736.png)
+    <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159205698-ebb6dde4-b13c-416a-b722-b29bcdfb9736.png" width="60%"></p>
 4. Fully connected layer 이후, Softmax Classifier과 Bounding Box Regressor
     - class 개수 : C + 1
 
@@ -134,7 +134,7 @@ image를 고정된 여러가지의 feature size에 맞게 binnig하여 pooling�
 
 **Fast R-CNN vs. Faster R-CNN**
 
-![image](https://user-images.githubusercontent.com/57162812/159206146-f056e5fd-4152-49b3-8fa1-a10add78e554.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/57162812/159206146-f056e5fd-4152-49b3-8fa1-a10add78e554.png" width="60%"></p>
 
 - Selective Search vs. RPN(Region Proposal Network)
 
@@ -143,11 +143,11 @@ image를 고정된 여러가지의 feature size에 맞게 binnig하여 pooling�
   - Anchor box 개념 사용
   > **Anchor box**
   > 각 cell마다의 scale과 ratio를 다르게 설정해 미리 설정한 bbox
-  > ![image](https://user-images.githubusercontent.com/57162812/159206471-8b88ff81-dcf9-4cb2-acdb-e18544b58459.png)
+  > <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159206471-8b88ff81-dcf9-4cb2-acdb-e18544b58459.png" width="30%"></p>
 
   > **Region Proposal Network(RPN)**
-  > ![image](https://user-images.githubusercontent.com/57162812/159206671-f7d5557a-ae61-4344-bbf0-64f0c9642510.png)
-  > ![image](https://user-images.githubusercontent.com/57162812/159207008-c839a508-af59-4cbd-af28-dd68c4da95a0.png)
+  > <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159206671-f7d5557a-ae61-4344-bbf0-64f0c9642510.png" width="60%"></p>
+  > <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159207008-c839a508-af59-4cbd-af28-dd68c4da95a0.png" width="60%"></p>
   > - 이미지 마다 feature map이 존재하며, 각 feature map의 각 cell마다 n개의 anchor box에 대해서 객체를 포함하는지 아닌지 확인하고 포함한다면 변화량을 학습한다.
   > - 2k scores + 4k coordinates
   
@@ -155,7 +155,7 @@ image를 고정된 여러가지의 feature size에 맞게 binnig하여 pooling�
   > - 유사한 RPN Proposal 제거하기 위해 사용
   > - Class score를 기준으로 proposal 분류
   > - IoU가 0.7 이상인 proposal 영역들은 중복된 영역으로 판단한 뒤 제거
-  > ![image](https://user-images.githubusercontent.com/57162812/159207323-64aadd71-c5d9-40af-ada5-1b74009e68b3.png)
+  > <p align="center"><img src="https://user-images.githubusercontent.com/57162812/159207323-64aadd71-c5d9-40af-ada5-1b74009e68b3.png" width="60%"></p>
   > - bb1을 기준으로 RoI가 큰 값들에 대해서 제거한다.
   >   - IoU(bb1, bb2) = 0.8 > 0.7 : bb2를 제거하며, bb2에 대한 bb2의 class score를 0으로 한다.
 
@@ -165,7 +165,7 @@ image를 고정된 여러가지의 feature size에 맞게 binnig하여 pooling�
     - IoU > 0.7 or highest IoU with GT : positive samples
     - IoU < 0.3 : negative samples
   - Loss
-    ![image](https://user-images.githubusercontent.com/57162812/159207619-eedf1a9a-a44d-428a-97f8-dbd661209048.png)
+    <img src="https://user-images.githubusercontent.com/57162812/159207619-eedf1a9a-a44d-428a-97f8-dbd661209048.png" width="30%">
     - regression loss는 객체가 있는 ROI에 대해서만 수행하기 위해 p_i를 곱해준다.
 - RPN 이후
   - Dataset
