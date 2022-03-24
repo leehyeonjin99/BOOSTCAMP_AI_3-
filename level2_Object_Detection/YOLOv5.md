@@ -71,3 +71,7 @@ python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 
 ```python
 python detect.py --weights yolov5x.pt yolov5l6.pt --img 640 --source data/images
 ```
+
+# Augmentation
+
+yolov5.utils.augmentation.py에서 수정 가능
