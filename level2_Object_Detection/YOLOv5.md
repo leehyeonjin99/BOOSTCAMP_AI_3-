@@ -56,7 +56,7 @@
 
 ### inference
 ```python
-python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 경로} --save-txt  --save-conf
+python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 경로} --save-txt --save-conf
 ```
 ### 출처
 - [object-detection-level2-cv-10](https://github.com/boostcampaitech2/object-detection-level2-cv-10/tree/main/yolov5)
@@ -69,9 +69,16 @@ python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 
 [Model Ensemble Tutorial](https://github.com/ultralytics/yolov5/issues/318)
 
 ```python
-python detect.py --weights yolov5x.pt yolov5l6.pt --img 640 --source data/images
+python detect.py --weights yolov5x.pt yolov5l6.pt --img 640 --source data/images --save-txt --save-conf
 ```
 
 # Augmentation
 
 yolov5.utils.augmentation.py에서 수정 가능
+
+# TTA
+[Test-Time Augmentation (TTA) Tutorial](https://github.com/ultralytics/yolov5/issues/303)
+
+```python
+python detect.py --weights yolov5x.pt --img 640 --source data/images --augment --save-txt --save-conf
+```
