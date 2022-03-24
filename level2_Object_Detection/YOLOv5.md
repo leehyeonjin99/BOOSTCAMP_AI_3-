@@ -53,6 +53,11 @@
        - data : custom_data 경로
        - cfg : 사용할 모델 : yolov5/models에서 확인 가능
        - weight : 사용할 모델의 pretained weight
+
+### inference
+```python
+python detect.py --source {test data 경로} --weight {model 저장 경로}
+```
 ### 출처
 - [object-detection-level2-cv-10](https://github.com/boostcampaitech2/object-detection-level2-cv-10/tree/main/yolov5)
 - [YOLOv5 in PyTorch - Train Custom Data 따라하기](https://www.youtube.com/watch?v=y3FkRXZqE2s)
