@@ -56,9 +56,18 @@
 
 ### inference
 ```python
-python detect.py --source {test data 경로} --weight {model 저장 경로}
+python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 경로} --save-txt  --save-conf
 ```
 ### 출처
 - [object-detection-level2-cv-10](https://github.com/boostcampaitech2/object-detection-level2-cv-10/tree/main/yolov5)
 - [YOLOv5 in PyTorch - Train Custom Data 따라하기](https://www.youtube.com/watch?v=y3FkRXZqE2s)
 - [[YOLOv5] train + inference 자세하게 알아보자](https://danny0628.tistory.com/65)
+
+# Cross Validation
+
+# Ensemble
+[Model Ensemble Tutorial](https://github.com/ultralytics/yolov5/issues/318)
+
+```python
+python detect.py --weights yolov5x.pt yolov5l6.pt --img 640 --source data/images
+```
