@@ -59,6 +59,7 @@
 
 - save-txt : label, coordination 저장
 - save-conf : confidence score 저장
+- conf-thres : confidence threshold로 confidence score가 지정값 이상이어야 저장된다. : default 0.25
 
 ```python
 python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 경로} --save-txt --save-conf
