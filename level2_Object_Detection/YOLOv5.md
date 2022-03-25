@@ -55,6 +55,10 @@
        - weight : 사용할 모델의 pretained weight
 
 ### inference
+
+- save-txt : label, coordination 저장
+- save-conf : confidence score 저장
+
 ```python
 python detect.py --source /opt/ml/detection/dataset/test --weight {model 저장 경로} --save-txt --save-conf
 ```
