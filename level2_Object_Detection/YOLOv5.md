@@ -53,6 +53,7 @@
        - data : custom_data 경로
        - cfg : 사용할 모델 : yolov5/models에서 확인 가능
        - weight : 사용할 모델의 pretained weight
+- best.pt : best mAP 기준, latest.pt : 마지막 model  
 
 ### inference
 
