@@ -62,7 +62,7 @@
 - conf-thres : confidence threshold로 confidence score가 지정값 이상이어야 저장된다. : default 0.25
 
 ```python
-python detect.py --source /opt/ml/detection/dataset/test --save-txt --save-conf --conv-thres {값} --weight {model 저장 경로}
+python detect.py --source /opt/ml/detection/dataset/test --save-txt --save-conf --con-thres {값} --weight {model 저장 경로}
 ```
 ### 출처
 - [object-detection-level2-cv-10](https://github.com/boostcampaitech2/object-detection-level2-cv-10/tree/main/yolov5)
