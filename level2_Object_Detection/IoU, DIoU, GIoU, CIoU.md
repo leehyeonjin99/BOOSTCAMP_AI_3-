@@ -56,7 +56,7 @@ iteration에 따른 DIoU Loss의 bounding box 예측 과정을 보면, GT와 ove
 
 object detection에서 DIoU Loss를 사용하는 경우, 두 box가 겹치지 않았을 때, GIoU처럼 영역을 넓히지 않고 중심 좌표를 통해 박스의 거리 차이를 최소화함으로써 수렴 속도를 향상시켰다.
 
-# CIoU(Complete-IOU)
+# 4. CIoU(Complete-IOU)
 
 bbox에 대한 좋은 loss는 overlap area, central point distance, aspect ratio 세 요소를 고려한 것이라고 한다. 따라서, overlap area와 central point distance를 고려한느 DIoU에 추가적으로 aspect ratio를 고려하는 CIoU를 제안한다.
 
