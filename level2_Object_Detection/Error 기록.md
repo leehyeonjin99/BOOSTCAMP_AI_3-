@@ -1,0 +1,2 @@
+- ImportError: libgl.so.1: cannot open shared object file: no such file or directory
+  - `Solution` : apt-get install libgl1-mesa-glx -y
