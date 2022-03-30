@@ -65,7 +65,7 @@ bbox에 대한 좋은 loss는 overlap area, central point distance, aspect ratio
 
 ![image](https://user-images.githubusercontent.com/57162812/160824466-940575d6-154c-448f-9ead-396c6b9d9747.png)
 
-이때, v는 두 box의 ascpect ration의 일치성을 측정하는 역할이고, α는 positive trade-off parameter로 non-overlapping case와 overlapping case의 ㅠㄴ형을 조정하는 역할을 한다. 
+이때, v는 두 box의 ascpect ration의 일치성을 측정하는 역할이고, α는 positive trade-off parameter로 non-overlapping case와 overlapping case의 형을 조정하는 역할을 한다. 
 
 
 
