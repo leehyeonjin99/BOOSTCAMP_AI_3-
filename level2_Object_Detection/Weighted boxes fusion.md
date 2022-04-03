@@ -24,3 +24,86 @@
 ## 실험 결과
 <p align='center'><img src="https://user-images.githubusercontent.com/57162812/160106005-60e958f2-39c7-43a2-ad03-30a3f8cc7af0.png" width="50%"></p>
 
+## CODE
+
+```python
+# 앙상블 대상 csv 파일
+submission_files = ["/opt/ml/0.5711.csv",
+                   "/opt/ml/0.5979.csv",
+                   "/opt/ml/0.6172.csv",
+                   "/opt/ml/0.6384.csv",
+                   "/opt/ml/0.6704.csv",
+                   "/opt/ml/0.5614.csv",
+                   "/opt/ml/0.6032.csv",
+                   "/opt/ml/0.6166.csv",
+                   "/opt/ml/0.5703.csv"] # submission csv 파일 이름을 넣어주세요
+
+submission_df = [pd.read_csv(file) for file in submission_files]
+
+# test file
+annotation = '/opt/ml/detection/dataset/test.json'
+coco = COCO(annotation)
+image_ids = submission_df[0]['image_id'].tolist()
+
+# 앙상블 진행
+prediction_strings = []
+file_names = []
+iou_thr = 0.5
+skip_box_thr=0
+conf_type = 'avg' # 'avg', 'max', 'box_and_model_avg', 'absent_model_aware_avg'
+'''
+param conf_type: how to calculate confidence in weighted boxes.
+    'avg': average value,
+    'max': maximum value,
+    'box_and_model_avg': box and model wise hybrid weighted average,
+    'absent_model_aware_avg': weighted average that takes into account the absent model.
+'''
+
+for i, image_id in enumerate(image_ids):
+    prediction_string = ''
+    boxes_list = []
+    scores_list = []
+    labels_list = []
+    image_info = coco.loadImgs(i)[0]
+    
+    for df in submission_df:
+        if df[df['image_id'] == image_id]['PredictionString'].tolist():
+            predict_string = df[df['image_id'] == image_id]['PredictionString'].tolist()[0]
+            predict_list = str(predict_string).split()
+        
+        if len(predict_list)==0 or len(predict_list)==1:
+            continue
+            
+        predict_list = np.reshape(predict_list, (-1, 6))
+        box_list = []
+        
+        for box in predict_list[:, 2:6].tolist():
+            box[0] = float(box[0]) / image_info['width']
+            box[1] = float(box[1]) / image_info['height']
+            box[2] = float(box[2]) / image_info['width']
+            box[3] = float(box[3]) / image_info['height']
+            box_list.append(box)
+            
+        boxes_list.append(box_list)
+        scores_list.append(list(map(float, predict_list[:, 1].tolist())))
+        labels_list.append(list(map(int, predict_list[:, 0].tolist())))
+    
+    if len(boxes_list):
+        # boxes, scores, labels = nms(boxes_list, scores_list, labels_list,iou_thr=iou_thr)
+        # boxes, scores, labels = soft_nms(box_list, scores_list, labels_list, iou_thr=iou_thr)
+        # boxes, scores, labels = non_maximum_weighted(boxes_list, scores_list, labels_list,iou_thr=iou_thr)
+        # boxes, scores, labels = weighted_boxes_fusion(boxes_list, scores_list, labels_list,iou_thr=0.5,conf_type='box_and_model_avg')
+        boxes, scores, labels = weighted_boxes_fusion(boxes_list, scores_list, labels_list, iou_thr=iou_thr, skip_box_thr=skip_box_thr)
+
+        for box, score, label in zip(boxes, scores, labels):
+            prediction_string += str(int(label)) + ' ' + str(score) + ' ' + str(box[0] * image_info['width']) + ' ' + str(box[1] * image_info['height']) + ' ' + str(box[2] * image_info['width']) + ' ' + str(box[3] * image_info['height']) + ' '
+    
+    prediction_strings.append(prediction_string)
+    file_names.append(image_id)
+ 
+# 앙상블 파일 저장
+submission = pd.DataFrame()
+submission['PredictionString'] = prediction_strings
+submission['image_id'] = file_names
+submission.to_csv('submission_ensemble5.csv')
+```
