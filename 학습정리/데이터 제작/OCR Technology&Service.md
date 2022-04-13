@@ -54,8 +54,8 @@ BIO 태깅을 활용한 개체명 인식
 
 # OCR Service
 1. Copy & Paste
-2. + Search
-3. + Matching : ex. 이미지를 통해 뮤직 플레이리스트 옮기기
-4. + 금칙어 처리
-5. + 번역
+2. \+ Search
+3. \+ Matching : ex. 이미지를 통해 뮤직 플레이리스트 옮기기
+4. \+ 금칙어 처리
+5. \+ 번역
 
