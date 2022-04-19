@@ -30,4 +30,4 @@ Real-tim Scene Text Detection with Differentiable Binarization
 **DBNet**
 - 💡IDEA : 글자 영역 구분에 threshold 갑을 이미지 별로 모델이 알아서 정하도록 하자.
 - 모델 출력 : `각 pixel이 글자 영역에 속할 확률값` + `이미지에 각 pixel별로 적용하 임계치`
-- 임계치 정답은 이렇게 나
+- 임계치 정
