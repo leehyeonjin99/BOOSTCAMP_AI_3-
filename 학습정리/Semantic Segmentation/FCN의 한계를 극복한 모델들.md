@@ -102,7 +102,7 @@ def forward(self, x):
 
 ## SegNet
 
-![Uploading image.png…]()
+<img width="1130" alt="image" src="https://user-images.githubusercontent.com/57162812/165236643-c24bfbf7-0441-49a2-9dcb-3c8f9181e220.png">
 
 ```python
 def CBR(in_channels, out_channels, kernel_size=3, stride=1, padding=1):
