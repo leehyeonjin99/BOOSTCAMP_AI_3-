@@ -168,4 +168,100 @@ self.score_fr = nn.Conv2d(64, num_classes, 3, 1, 1, 1)
 # Skip Connection을 적용한 모델
 ## FC DenseNet
 
-> **Skip Connection**
+<img width="639" alt="image" src="https://user-images.githubusercontent.com/57162812/165344542-f6890e7e-8564-44ed-a373-b51e434cde30.png">
+
+> **Skip Connection이란?**
+> 
+> <img width="300" alt="image" src="https://user-images.githubusercontent.com/57162812/165343543-bb69f530-039f-4d47-bb7d-e4063be13b05.png">
+> 
+> Neural Network에서 이전 layer의 output을 일부 layer를 건너 뛴 후의 layer에게 입력으로 제공하는 것
+
+> **DenseNet**
+> 
+> <img width="460" alt="image" src="https://user-images.githubusercontent.com/57162812/165344196-bfb7bfdb-fb07-4e5f-b3c3-3adcff6d4eef.png">
+> 
+> Neural Network에서 이전 모든 layer의 output을 일부 layer를 건너 뛴 후의 layer에게 입력으로 제공하는 것
+
+
+## UNet
+
+<img width="519" alt="image" src="https://user-images.githubusercontent.com/57162812/165344631-567f4100-efba-4fdd-8718-1ba786e13384.png">
+
+# Receptive Field를 확장시킨 models
+
+> **receptive field란?**
+> 
+> 하나의 pixel이 바라보는 영역으로 receptive field가 클수록 큰 object detection에 좋다.
+> 
+> 10x10 resolution → (3x3 Conv) → 8x8 resolution → (3x3 Conv) → 6x6 resolution : 하나의 pixel은 5x5의 input image의 의미를 담고 있다.
+>
+> 10x10 resolution → (3x3 Conv) → 8x8 resolution → (MaxPool) → 4x4 resolution → (3x3 Conv) → 2x2 resolution : 하나의 pixel은 8x8 input image의 의미를 담고 있다. 
+>
+> 즉, Conv → Max pooling → Conv를 반복하면, 효율적으로 receptive field를 넓힐 수 있다. 하지만, resolution 측면에서는 low feature resolution을 가지는 문제 발생
+
+그렇다면 이미지 크기는 많이 줄이지 않고, 파라미터의 수도 변함없는 채로, receptive field만 넓게 하는 방식이 없을까? → **Dilated Convolution**
+
+> Dilated Convolution
+>
+> <img width="330" alt="image" src="https://user-images.githubusercontent.com/57162812/165346112-5f02f1de-d32a-4e1d-a0b6-2e1b2bae4423.png">
+
+<img width="632" alt="image" src="https://user-images.githubusercontent.com/57162812/165346382-b3ef508f-6a1a-4059-85ea-a3d33cc5d270.png">
+
+```python
+def conv_relu(in_channels, out_channels, size=3, rate=1):
+        conv_relu = nn.Sequential(nn.Conv2d(in_channels = in_channels,
+                                            out_channels = out_channels,
+                                            kernel_size = 3,
+                                            stride = 1,
+                                            padding = rate,
+                                            dilation = rate),
+                                  nn.ReLU())
+        return conv_relu
+        
+def VGG16(nn.Module):
+        def __init__(self):
+                super(VGG16, self).__init__()
+                self.features1 = nn.Sequential(conv_relu(3, 64, 3, 1),
+                                               conv_relu(64, 64, 3, 1),
+                                               nn.MaxPool2d(3, stride = 2, padding = 1))
+                ...
+                
+# Up sampling
+from torch.nn imoprt functional as F
+
+class DeepLabV1(nn.Module):
+        def __init__(self, backbone, classifier, upsampling=8):
+                super(DeepLabV1, self).__init__()
+                self.backbone = backbone
+                self.classifier = classifier
+                self.upsampling = upsampling
+        def forward(self, x):
+                x = self.backbone(x)
+                _, _, feature_map_h, feature_map_w = x.size()
+                x = self.classifier(x)
+                x = F.interpolate(x, size=(feature_map_h*self.upsampling, feature_map_w*self.upsampling), mode=bilinear)
+```
+
+> **Bilinear Interpolation이란?**
+> 
+> `align_corners=True`
+> 
+> <img width="630" alt="image" src="https://user-images.githubusercontent.com/57162812/165351066-2616006b-04db-4d32-ba88-cc06cb287e20.png">
+>
+> `align_corners=False`
+> 
+> <img width="631" alt="image" src="https://user-images.githubusercontent.com/57162812/165351168-59d20ea7-ef57-4fd3-8773-8b7f4efdd7d5.png">
+
+하지만, Bilinear Interpolation으로는 픽셀 단위의 정교한 segmentation이 불가능하다. 이를 개선하기 위해서 후처리 방법으로 **Dense CRF(Conditional Random Field)**를 사용한다.
+
+1. DeepLab v1을 이용해 segmentation 수행
+2. 계산된 확률 및 이미지를 CRF에 입력
+		- 색상이 유사한 픽셀이 가까이 위치하면 같은 범주에 포함
+		- 색상이 유사해도 거리가 멀다면 같은 범주에 속하지 않음
+3. 여러번 반복 수행
+4. 모든 카테고리에 대해서 같은 과정을 수행
+5. 각 픽셀별 가장 높은 확률을 갖는 카테고리를 선택하여 최종 결과 도출
+
+## DilatedNet
+
+<img width="645" alt="image" src="https://user-images.githubusercontent.com/57162812/165352147-77c0248a-d437-449f-97c2-9b5e5ae10cd6.png">
