@@ -99,3 +99,36 @@ def forward(self, x):
   ...
   h = self.deconv5_3(self.deconv5_2(self.deconv5_1(self.unpool5(h, loc_indices5))))
 ```
+
+## SegNet
+
+![Uploading image.png…]()
+
+```python
+def CBR(in_channels, out_channels, kernel_size=3, stride=1, padding=1):
+    return nn.Sequential(
+        nn.Conv2d(in_channels = in_channels,
+                  out_channels = out_channels,
+                  kernel_size = kernel_size,
+                  stride = stride,
+                  padding = padding),
+        nn.BatchNorm2d(out_channels),
+        nn.ReLU())
+        
+## conv1
+self.cbr1_1 = CBR(3, 64, 3, 1, 1)
+self.cbr1_2 = CBR(64, 64, 3, 1, 1)
+self.pool1 = nn.MaxPool2d(2, stride=2, ceil_code=True, return_indices=True)
+
+## 5개의 Maxpool을 통해 resolution이 1/32배가 되었다.
+
+# deconv5
+self.unpool5 = nn.MaxUnPool2d(2, stride=2)
+self.dcbr5_3 = CBR(512, 512, 3, 1, 1)
+self.dcbr5_2 = CBR(512, 512, 3, 1, 1)
+self.dcbr5_1 = CBR(512, 512, 3, 1, 1)
+
+## 5개의 MaxUnPool을 통해 resolution이 32배가 되었다.
+
+# Score
+self.score_fr = nn.Conv2d(64, num_classes, 3, 1, 1, 1)
