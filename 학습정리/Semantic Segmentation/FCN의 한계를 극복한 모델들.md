@@ -1,7 +1,30 @@
+## FCN 한계점
+1. 객체으 크기가 작거 크 경우 예측을 잘 하지 못한다.
+        - 큰 object의 경우 지역적인 정보만으로 예측 ⇒ 같은 object여도 다르게 labeling
+        - 이유는 receptive field가 작아서?
+        - 작은 object는 무시되는 경우도 발생
+
+2. Detail한 모습이 사라지느 문제 발생
+        - Deconvolution 절차가 간단해 경계르 학습하기 어렵다.
+        - Skip connection을 통해 Tranpose convolution 진행하였지만 아지 부족하다...
+
 ## Decoder를 개선한 모델
 ### DoconvNet
 
 <img width="1060" alt="image" src="https://user-images.githubusercontent.com/57162812/165232921-d662f5d6-327a-4bc6-b040-44983287addd.png">
+
+1. 1x1 Conv를 중심으로 Encoder와 Decoder가 `대칭`의 형태를 지닌다.
+2. backbone : `VGG 16`
+3. Conv = Conv2d + BatchNorm + ReLU
+4. Deconv = TranposeConv2d + BatchNorm + ReLU
+
+> **Unpooling이란?**
+> 
+> <img width="637" alt="image" src="https://user-images.githubusercontent.com/57162812/165340318-960cdbed-1cb9-4773-b808-e93ed4ead78c.png">
+>
+> MaxPool의 경우 kernel size만큼의 값들 중 위치와 관계없이 최댓값을 뽑아오게 된다. 이때, 위치 정보를 잃어버리게 된다. 따라서 MaxPool시 위치 정보 `max indices`를 저장해두어 Unpooling시 사용한다. 즉, 지워진 경계르 기록했다가 복원이 가능해진다. maxunpool을 거친 activation map은 대부분이 0인 sparse activation map이기 때문에 Tranposed Convolution을 수행하여 채워주게 된다.
+> 
+> 따라서, (Unpooling + Deconv)를 반복적으로 수행하게 되다며 츠으이 구조가 다양하 수준의 모양을 잡아낼 수 있다. 얕은 층에서는 전반적인 특징을 잡아내고, 깊은 층에서는 복잡한 패턴으 잡아내게 된다.
 
 
 ```python
@@ -104,6 +127,10 @@ def forward(self, x):
 
 <img width="1130" alt="image" src="https://user-images.githubusercontent.com/57162812/165236643-c24bfbf7-0441-49a2-9dcb-3c8f9181e220.png">
 
+1. 자율 중해에서 사용하기 위해서는 빠르고 정확하게 예측 가능해야한다.
+        - DeconvNet의 가운데 fc layer를 제거한다. → 파라미터 수 감소 및 수행 속도 증가
+        - Unpooling의 output으 Deconv가 아닌 Conv를 통과시킨다.
+
 ```python
 def CBR(in_channels, out_channels, kernel_size=3, stride=1, padding=1):
     return nn.Sequential(
@@ -120,7 +147,7 @@ self.cbr1_1 = CBR(3, 64, 3, 1, 1)
 self.cbr1_2 = CBR(64, 64, 3, 1, 1)
 self.pool1 = nn.MaxPool2d(2, stride=2, ceil_code=True, return_indices=True)
 
-## 5개의 Maxpool을 통해 resolution이 1/32배가 되었다.
+# 5개의 Maxpool을 통해 resolution이 1/32배가 되었다.
 
 # deconv5
 self.unpool5 = nn.MaxUnPool2d(2, stride=2)
@@ -132,3 +159,13 @@ self.dcbr5_1 = CBR(512, 512, 3, 1, 1)
 
 # Score
 self.score_fr = nn.Conv2d(64, num_classes, 3, 1, 1, 1)
+```
+
+## DeconvNet vs. SegNet
+
+<img width="659" alt="image" src="https://user-images.githubusercontent.com/57162812/165342084-ebe7a82d-0e02-4b9c-be18-9c3cd6f11447.png">
+
+# Skip Connection을 적용한 모델
+## FC DenseNet
+
+> **Skip Connection**
